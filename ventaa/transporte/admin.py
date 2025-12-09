@@ -3,7 +3,7 @@ from .models import Envio, EventoTrazabilidad
 
 class EventoTrazabilidadInline(admin.TabularInline):
     model = EventoTrazabilidad
-    extra = 1 # Muestra un campo extra para añadir un nuevo evento
+    extra = 1
     readonly_fields = ('fecha_hora',)
 
 @admin.register(Envio)

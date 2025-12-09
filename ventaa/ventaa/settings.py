@@ -77,14 +77,34 @@ WSGI_APPLICATION = 'ventaa.wsgi.application'
 
 
 DATABASES = {
-  'default': {
-      'ENGINE': 'django.db.backends.mysql',
-      'NAME': 'tienda_estrellita',
-      'USER': 'root',
-      'PASSWORD': '',
-      'HOST': '127.0.0.1',
-      'PORT': '3306',
-  }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'produccion_db': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'db_produccion',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '192.168.145.30',
+        'PORT': '3306',
+    },
+    'ventas_db': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'db_ventas',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '192.168.145.255',
+        'PORT': '3306',
+    },
+    'hotel_db': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'db_hotel',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '192.168.145.140',
+        'PORT': '3306',
+    },
 }
 
 # Password validation
