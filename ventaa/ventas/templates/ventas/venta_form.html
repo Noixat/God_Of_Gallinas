@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Venta Rápida</title>
+</head>
+<body>
+    <h1>Venta Rápida</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="cantidad_gallinas">Cantidad de gallinas:</label>
+        <input type="number" name="cantidad_gallinas" id="cantidad_gallinas" value="0" min="0">
+
+        <label for="cantidad_huevos">Cantidad de huevos:</label>
+        <input type="number" name="cantidad_huevos" id="cantidad_huevos" value="0" min="0">
+
+        <button type="submit">Crear Venta</button>
+    </form>
+    {% if mensaje %}
+        <p style="color:green;"><strong>{{ mensaje }}</strong></p>
+    {% endif %}
+
+    {% if detalles_venta %}
+        <h2>Detalles de la venta</h2>
+        <table border="1" cellpadding="6" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio unitario</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in detalles_venta %}
+                <tr>
+                    <td>{{ d.tipo }}</td>
+                    <td>{{ d.producto_nombre }}</td>
+                    <td>{{ d.cantidad }}</td>
+                    <td>${{ d.precio_unitario }}</td>
+                    <td>${{ d.subtotal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <p><a href="{% url 'home' %}">Volver al inicio</a></p>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Ventas{% endblock %}</title>
+</head>
+<body>
+    <h1>{% block header %}Panel de Ventas{% endblock %}</h1>
+    <nav>
+        <a href="{% url 'home' %}">Inicio</a> |
+        <a href="{% url 'crear_venta_rapida' %}">Venta Rápida</a> |
+        <a href="{% url 'venta_automatica' %}">Venta Automática</a>
+    </nav>
+    <hr>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

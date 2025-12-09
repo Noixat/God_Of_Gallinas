@@ -1,0 +1,47 @@
+{% extends "ventas/base.html" %}
+
+{% block title %}Seguimiento de Envío{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>🔗 Trazabilidad del Envío: {{ envio.numero_seguimiento }}</h2>
+    <hr>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <strong>Resumen del Envío</strong>
+        </div>
+        <div class="card-body">
+            <p><strong>De:</strong> {{ envio.remitente_nombre }}</p>
+            <p><strong>Para:</strong> {{ envio.destinatario_nombre }}</p>
+            <p><strong>Dirección:</strong> {{ envio.destinatario_direccion }}</p>
+            <p><strong>Estado Actual:</strong> <span class="badge bg-info">{{ envio.get_estado_actual_display }}</span></p>
+        </div>
+    </div>
+
+    <h4>Historial de Movimientos</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Fecha y Hora</th>
+                <th>Ubicación</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for evento in envio.eventos.all %}
+            <tr>
+                <td>{{ evento.fecha_hora|date:"d/m/Y H:i" }}</td>
+                <td>{{ evento.ubicacion }}</td>
+                <td>{{ evento.estado }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="text-center">No hay eventos de seguimiento para este envío.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'crear_envio' %}" class="btn btn-secondary mt-3">Crear otro envío</a>
+</div>
+{% endblock %}

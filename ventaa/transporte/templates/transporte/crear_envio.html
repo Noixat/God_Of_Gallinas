@@ -1,0 +1,41 @@
+{% extends "ventas/base.html" %}
+
+{% block title %}Crear Nuevo Envío{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>🚚 Crear Nuevo Envío</h2>
+    <p>Simula la etapa de ingreso y admisión de un paquete en una sucursal.</p>
+    
+    <form method="post" class="card p-4">
+        {% csrf_token %}
+        
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="mb-3">
+            <label for="{{ form.remitente_nombre.id_for_label }}" class="form-label">Nombre del Remitente</label>
+            {{ form.remitente_nombre }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.destinatario_nombre.id_for_label }}" class="form-label">Nombre del Destinatario</label>
+            {{ form.destinatario_nombre }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.destinatario_direccion.id_for_label }}" class="form-label">Dirección del Destinatario</label>
+            {{ form.destinatario_direccion }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.peso_kg.id_for_label }}" class="form-label">Peso (kg)</label>
+            {{ form.peso_kg }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Crear y Etiquetar Envío</button>
+    </form>
+</div>
+{% endblock %}

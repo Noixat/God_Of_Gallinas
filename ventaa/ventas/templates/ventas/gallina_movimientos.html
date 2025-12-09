@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Movimientos de Gallinas</title>
+    <style>
+        body{ font-family: Arial, sans-serif; padding:1rem }
+        table{ border-collapse: collapse; width:100% }
+        th, td{ border:1px solid #ccc; padding:8px; text-align:left }
+        th{ background:#f4f4f4 }
+    </style>
+</head>
+<body>
+    <h1>Movimientos de Gallinas</h1>
+    <p><a href="{% url 'home' %}">Volver al inicio</a></p>
+    {% if gallinas %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Disponible</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for g in gallinas %}
+            <tr>
+                <td>{{ g.idgallina }}</td>
+                <td>{{ g.nombre }}</td>
+                <td>{{ g.check_in }}</td>
+                <td>{% if g.check_out %}{{ g.check_out }}{% else %}-{% endif %}</td>
+                <td>{{ g.disponible }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No hay gallinas registradas.</p>
+    {% endif %}
+</body>
+</html>

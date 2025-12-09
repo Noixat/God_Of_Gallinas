@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Tienda</title>
+    <style>
+        body{ font-family: Arial, sans-serif; padding: 1rem }
+        .card{ border:1px solid #ddd; padding:1rem; margin:1rem 0; border-radius:6px }
+        label{ display:block; margin:0.5rem 0 }
+    </style>
+</head>
+<body>
+    <h1>Tienda</h1>
+    <p>Aquí puedes comprar gallinas y huevos. Indica la cantidad para cada producto y presiona "Realizar compra".</p>
+
+    <form method="post" action="{% url 'crear_venta_rapida' %}">
+        {% csrf_token %}
+
+        <div class="card">
+            <h2>Comprar Gallinas</h2>
+            <label for="cantidad_gallinas">Cantidad de gallinas</label>
+            <input type="number" name="cantidad_gallinas" id="cantidad_gallinas" value="0" min="0">
+            {% if gallinas %}
+                <ul>
+                {% for g in gallinas %}
+                    <li>{{ g.nombre }} — Precio: ${{ g.precio }} — Disponible: {{ g.disponible }}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No hay gallinas disponibles.</p>
+            {% endif %}
+        </div>
+
+        <div class="card">
+            <h2>Comprar Huevos</h2>
+            <label for="cantidad_huevos">Cantidad de huevos</label>
+            <input type="number" name="cantidad_huevos" id="cantidad_huevos" value="0" min="0">
+            {% if huevos %}
+                <ul>
+                {% for h in huevos %}
+                    <li>{{ h.nombre }} — Precio: ${{ h.precio }} — Stock: {{ h.stock }}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No hay huevos en stock.</p>
+            {% endif %}
+        </div>
+
+        <button type="submit">Realizar compra</button>
+    </form>
+
+    <hr>
+    <p>
+        <a href="{% url 'venta_automatica' %}">Procesar venta automática (ejemplo)</a> |
+        <a href="{% url 'home' %}">Refrescar</a> |
+        <a href="/admin/">Panel de administración</a>
+    </p>
+
+    <p>
+        <a href="{% url 'gallina_movimientos' %}"><button type="button">Ver check-in / check-out de gallinas</button></a>
+    </p>
+
+</body>
+</html>

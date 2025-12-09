@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Procesar Venta Automática</title>
+</head>
+<body>
+    <h1>Procesar Venta Automática</h1>
+    <a href="{% url 'home' %}">Volver al Inicio</a>
+    <hr>
+    <p>Esta acción simulará una venta automática de la primera gallina disponible y 5 huevos.</p>
+    {% if mensaje %}
+        <p><strong>{{ mensaje }}</strong></p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Procesar Venta Automática</button>
+    </form>
+</body>
+</html>
